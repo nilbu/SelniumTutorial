@@ -1,10 +1,11 @@
-import org.openqa.selenium.By;
-import org.openqa.selenium.InvalidArgumentException;
-import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.*;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.firefox.FirefoxDriver;
 import org.openqa.selenium.ie.InternetExplorerDriver;
+import org.testng.Assert;
 import org.testng.annotations.Test;
+
+import java.security.Key;
 
 public class SeleniumTest {
 
@@ -27,30 +28,45 @@ public class SeleniumTest {
 //        WebDriver driver = new InternetExplorerDriver();
 //        driver.get("https://google.com");
 
-    WebDriver driver = getDriver("chrome","firefox");
+    WebDriver driver = getDriver("chrome");
     driver.get("https://google.com");
-   //driver.findElement(By.id("label"));
-    }
-    public static void dupa(){
+    driver.manage().window().maximize();
+    // przechodzimy do wew okienka z plikami cookie
+  //  driver.switchTo().frame(0);
+    //znajdowanie przycisku
+        WebElement agreeButton = driver.findElement(By.xpath("//div[text()='Zaakceptuj wszystko']"));
+        agreeButton.click();
+        // pole do wyszukiwania
+        WebElement searchField = driver.findElement(By.name("q"));
+        searchField.sendKeys("selenium");
+        searchField.sendKeys(Keys.ENTER);
+        //znalezc rezultat
+        WebElement result = driver.findElement(By.xpath("//a[contains(@href,'selenium.dev')]//h3"));
+
+        Assert.assertTrue(result.isDisplayed());
+
+
+
 
     }
-    public WebDriver getDriver(String browser, String brow){
 
-        String chromePath = "C:\\Users\\Mennica\\Documents\\Automaty\\WebDriver\\chromedriver_win32\\chromedriver.exe";
+    public WebDriver getDriver(String browser){
 
-        if((browser == "chrome") & (brow == "firefox")) {
+       // String Path = "C:\\Users\\Mennica\\Documents\\Automaty\\WebDriver\\chromedriver.exe";  // nie potrzebna jest sciezka bo zostala dodana do zmiennych srodowiskowych
+
+        if(browser == "chrome")   {
            // String path = "C:\\Users\\Mennica\\Documents\\Automaty\\WebDriver\\chromedriver_win32\\chromedriver.exe";
-            System.setProperty("webdriver.chrome.driver", chromePath);
+        //    System.setProperty("webdriver.chrome.driver");
             return new ChromeDriver();
 
             //driver.get("https://google.com");
         }else if(browser == "firefox"){
-            String path = "C:\\Users\\Mennica\\Documents\\Automaty\\WebDriver\\geckodriver-v0.32.2-win64\\geckodriver.exe";
-            System.setProperty("webdriver.gecko.driver", path);
+           // String path = "C:\\Users\\Mennica\\Documents\\Automaty\\WebDriver\\geckodriver.exe";
+          //  System.setProperty("webdriver.gecko.driver", path);
             return new FirefoxDriver();
         } else if (browser == "ie") {
-            String path = "C:\\Users\\Mennica\\Documents\\Automaty\\WebDriver\\IEDriverServer_x64_4.8.0\\IEDriverServer.exe";
-             System.setProperty("webdriver.ie.driver", path);
+            // String path = "C:\\Users\\Mennica\\Documents\\Automaty\\WebDriver\\IEDriverServer.exe";
+           //  System.setProperty("webdriver.ie.driver", path);
              return new InternetExplorerDriver();
         }  else throw new InvalidArgumentException("Podaj prawidłową nazwę");
 
