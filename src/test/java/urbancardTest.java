@@ -79,12 +79,9 @@ public class urbancardTest {
         //driver.findElement(reCaptcha).click();
 
         By pesel = By.cssSelector("div + input");
-        driver.findElement(pesel).sendKeys("82012403693");
+        driver.findElement(pesel).sendKeys("63111061410");
 
-        //Przycisk Wyczysc pole
-        //By wyczysc = By.cssSelector("#clearDataBtn");
-//        By wyczysc = By.xpath("//*[@id=\"clearDataBtn\"]");
-//        driver.findElement(wyczysc).sendKeys(Keys.ENTER);
+
 
         By imie = By.cssSelector("#firstnameTxt");
         driver.findElement(imie).sendKeys("Test");
@@ -121,21 +118,6 @@ public class urbancardTest {
 
      //   driver.findElement(By.xpath("//span[@id='recaptcha-anchor']")).click();
 
-
-
-
-
-
-      //  driver.("$('#recaptcha-anchor').setAttribute('aria-checked','true');");
-
-                //Przycisk Powrót
-//        By powrot = By.cssSelector("#ctl00_mainContent_ctl00_panel > div > div.col-md-9 > div.col-xs-6.col-xs-offset-3.col-sm-12.col-sm-offset-0.form-group > div > div:nth-child(1) > a");
-//        driver.findElement(powrot).sendKeys(Keys.ENTER);
-
-
-
-//        WebElement wyczysc1 = driver.findElement(By.name("ctl00$mainContent$ctl00$clearDataBtn"));
-//        wyczysc1.sendKeys(Keys.ENTER);
 
 
         //DODAJ ZDJECIE od AI
@@ -176,8 +158,8 @@ public class urbancardTest {
         captchaBox.click();
 
         // Przełączenie na okno reCAPTCHA
-        driver.switchTo().defaultContent();
-        wait.until(ExpectedConditions.frameToBeAvailableAndSwitchToIt(By.cssSelector("iframe[src^='https://www.google.com/recaptcha/api2/bframe?']")));
+       // driver.switchTo().defaultContent();
+      //  wait.until(ExpectedConditions.frameToBeAvailableAndSwitchToIt(By.cssSelector("iframe[src^='https://www.google.com/recaptcha/api2/bframe?']")));
 
         // Oczekiwanie na wyświetlenie przycisku "I'm not a robot"
        // wait.until(ExpectedConditions.visibilityOfElementLocated(By.cssSelector("div#recaptcha-verify-button")));
@@ -188,16 +170,35 @@ public class urbancardTest {
 
         // Powrót do głównego okna przeglądarki
         driver.switchTo().defaultContent();
-        Thread.sleep(5000);  // opóżnienie
+        // opóżnienie na wyslij
+        Thread.sleep(5000);
 
                 //Przycisk wyslij
 
         By wyslij = By.cssSelector("#sendApplication");
-        WebDriverWait wait1 = new WebDriverWait(driver, 10);                // W tym kodzie używamy klasy WebDriverWait, aby poczekać na pojawienie się elementu określonego w zmiennej wyslij. Metoda until() oczekuje na pojawienie się elementu przez 10 sekund lub aż element będzie można kliknąć (używając metody elementToBeClickable() z klasy ExpectedConditions). Następnie klikamy na element, używając sendKeys().
-        WebElement element = wait1.until(ExpectedConditions.elementToBeClickable(wyslij));  //
-        element.sendKeys(Keys.ENTER);
+      //  WebDriverWait wait1 = new WebDriverWait(driver, 10);                // W tym kodzie używamy klasy WebDriverWait, aby poczekać na pojawienie się elementu określonego w zmiennej wyslij. Metoda until() oczekuje na pojawienie się elementu przez 10 sekund lub aż element będzie można kliknąć (używając metody elementToBeClickable() z klasy ExpectedConditions). Następnie klikamy na element, używając sendKeys().
+      // WebElement element = wait1.until(ExpectedConditions.elementToBeClickable(wyslij));  //
+      //  element.sendKeys(Keys.ENTER);
+        driver.findElement(wyslij).sendKeys(Keys.ENTER);
+
+        //wysłanie wniosku z tym samym nr PESEL
+        By partialText = By.cssSelector("#cardProposal > div:nth-child(1) > div > p > span").partialLinkText("Twój wniosek nie został zarejestrowany w systemie."); //wystarczy podać jeden człon z tekstu
+        WebElement testPartial = driver.findElement(partialText);
+        Assert.assertTrue(testPartial.isDisplayed());
 
 
+        //Przycisk Powrót
+//        By powrot = By.cssSelector("#ctl00_mainContent_ctl00_panel > div > div.col-md-9 > div.col-xs-6.col-xs-offset-3.col-sm-12.col-sm-offset-0.form-group > div > div:nth-child(1) > a");
+//        driver.findElement(powrot).sendKeys(Keys.ENTER);
+
+
+        //Przycisk Wyczysc pole
+        //By wyczysc = By.cssSelector("#clearDataBtn");
+//        By wyczysc = By.xpath("//*[@id=\"clearDataBtn\"]");
+//        driver.findElement(wyczysc).sendKeys(Keys.ENTER);
+
+//        WebElement wyczysc1 = driver.findElement(By.name("ctl00$mainContent$ctl00$clearDataBtn"));
+//        wyczysc1.sendKeys(Keys.ENTER);
 
 
 
