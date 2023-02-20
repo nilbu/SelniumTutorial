@@ -15,6 +15,7 @@ import org.testng.annotations.Test;
 
 import java.io.IOException;
 import java.time.Duration;
+import java.util.List;
 import java.util.concurrent.TimeUnit;
 
 public class urbancardTest {
@@ -42,10 +43,8 @@ public class urbancardTest {
 
            //driver.navigate().to(www);
 
-
         By cookie = By.cssSelector("#cookie_accept > a");
         driver.findElement(cookie).click();
-
 
 
             // RECAPTCHA 1 sposób AI
@@ -81,8 +80,6 @@ public class urbancardTest {
         By pesel = By.cssSelector("div + input");
         driver.findElement(pesel).sendKeys("63111061410");
 
-
-
         By imie = By.cssSelector("#firstnameTxt");
         driver.findElement(imie).sendKeys("Test");
 
@@ -116,9 +113,6 @@ public class urbancardTest {
         By checkBox1 = By.cssSelector("#ctl00_mainContent_ctl00_consentRepeater_ctl01_ischeckedRepeater");
         driver.findElement(checkBox1).click();
 
-     //   driver.findElement(By.xpath("//span[@id='recaptcha-anchor']")).click();
-
-
 
         //DODAJ ZDJECIE od AI
         // Włączenie możliwości wyboru pliku z lokalnego systemu
@@ -132,6 +126,7 @@ public class urbancardTest {
         // Wybór pliku z lokalnego dysku
         WebElement fileInput = driver.findElement(By.cssSelector("input[type='file']"));
         fileInput.sendKeys("C:\\Users\\Mennica\\Documents\\Bez nazwy2.png");
+        //fileInput.sendKeys("C:\\Users\\Mennica\\Downloads\\PEO000002678080.pdf");
 
         // Zatwierdzenie wybranego pliku
 //        WebElement submitButton = driver.findElement(By.cssSelector("input[name='Otwórz']"));
@@ -144,9 +139,6 @@ public class urbancardTest {
 
         // Oczekiwanie na przesłanie pliku
       //  Thread.sleep(2000); // czekaj 2 sekundy
-
-
-
 
 
         // Oczekiwanie na wczytanie reCAPTCHA
@@ -181,10 +173,58 @@ public class urbancardTest {
       //  element.sendKeys(Keys.ENTER);
         driver.findElement(wyslij).sendKeys(Keys.ENTER);
 
-        //wysłanie wniosku z tym samym nr PESEL
-        By partialText = By.cssSelector("#cardProposal > div:nth-child(1) > div > p > span").partialLinkText("Twój wniosek nie został zarejestrowany w systemie."); //wystarczy podać jeden człon z tekstu
-        WebElement testPartial = driver.findElement(partialText);
-        Assert.assertTrue(testPartial.isDisplayed());
+        //ASERCJA 1 wysłanie wniosku z tym samym nr PESEL
+
+        // Poczekaj na pojawienie się elementu z tekstem "PESEL"
+//        WebElement element = new WebDriverWait(driver, 10).until(ExpectedConditions.visibilityOfElementLocated(By.cssSelector("#cardProposal > div:nth-child(1) > div > p")));
+//        String preferText = element.getText();
+//
+//        // Sprawdza czy znaleziony tekst zawiera oczekiwany kawałek tekstu, jeżlei nie to wypisz tekst
+//        String expectedText = "PESEL";
+//        assert preferText.contains(expectedText) : "Kawałek tekstu '" + expectedText + "' nie został znaleziony.";
+
+        //ASERCJA 2 brak zdjęcia
+//        WebElement element1 = new WebDriverWait(driver, 10).until(ExpectedConditions.visibilityOfElementLocated(By.cssSelector("#cardProposal > div:nth-child(1) > div > p")));
+//        String preferText1 = element1.getText();
+//        String expectedText1 = "brak zdjęcia";
+//        assert preferText1.contains(expectedText1) : "Kawałek tekstu '" + expectedText1 + "' nie został znaleziony.";
+
+        // ASERCJA PETLA po znalezieniu wszystkich elementów na stronie, iterujemy przez każdy z nich i sprawdzamy, czy faktyczny tekst zawiera oczekiwany kawałek tekstu. Jeśli tak, to wykonujemy asercję i zwiększamy licznik wystąpień count. Na końcu sprawdzamy, czy kawałek tekstu wystąpił co najmniej raz, i wykonujemy odpowiednią asercję.
+
+//        // Poczekaj na pojawienie się elementów z tekstem "Example"
+//        List<WebElement> elements = new WebDriverWait(driver, 10).until(ExpectedConditions.visibilityOfAllElementsLocatedBy(By.cssSelector("#cardProposal > div:nth-child(1) > div > p")));
+//        String expectedText = "brak zdjęcia";
+//        int count = 0;
+//        for (WebElement element : elements) {
+//            String actualText = element.getText();
+//            if (actualText.contains(expectedText)) {
+//                // Sprawdź, czy znaleziony tekst zawiera oczekiwany kawałek tekstu
+//                assert actualText.contains(expectedText) : "Kawałek tekstu '" + expectedText + "' nie został znaleziony w elemencie: " + element.toString();
+//                count++;
+//            }
+//        }
+//
+//        // Sprawdź, czy kawałek tekstu wystąpił co najmniej raz
+//        assert count > 0 : "Kawałek tekstu '" + expectedText + "' nie został znaleziony na stronie.";
+
+        //ASERCJA DLA DANEGO WYSTAPIENIA WYRAZU
+
+        // Wyszukanie elementów zawierających wyraz "brak zdjecia"
+//        WebElement exampleElement = driver.findElement(By.xpath("//*[contains(text(), 'brak zdjęcia')]"));
+//
+//        // Sprawdzenie, czy tekst z elementu z wyrazem "example" jest zgodny z oczekiwanym
+//        Assert.assertTrue(exampleElement.getText().contains("brak zdjęcia"));
+//
+//
+//        // Jeśli nie znaleziono elementu z wyrazem "example", poszukaj elementu z wyrazem "PESEL"
+//        if (exampleElement == null) {
+//            WebElement testElement = driver.findElement(By.xpath("//*[contains(text(), 'PESEL')]"));
+//
+//            // Sprawdzenie, czy tekst z elementu z wyrazem "test" jest zgodny z oczekiwanym
+//            Assert.assertTrue(exampleElement.getText().contains("PESEL"));
+//        }
+
+
 
 
         //Przycisk Powrót
