@@ -2,6 +2,7 @@ import io.github.bonigarcia.wdm.WebDriverManager;
 import org.openqa.selenium.By;
 import org.openqa.selenium.NoSuchElementException;
 import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.testng.annotations.Test;
 
@@ -13,12 +14,30 @@ public class ElementExistTest {
         WebDriverManager.chromedriver().setup();
         driver = new ChromeDriver();
         driver.get("https://testeroprogramowania.github.io/selenium/basics.html");
-
+        //sprawdzanie czy element istnieje w strukturze stonry i wypisane odpowiedniego komunikatu z pomoca metod poniżej
         System.out.println(elementExist(By.tagName("p")));
         System.out.println(elementExist(By.id("topSecret")));
 
         System.out.println(elementExistSecound(By.tagName("p")));
         System.out.println(elementExistSecound(By.id("topSecret")));
+
+        //sprawdzanie czy element jest wyswietlony
+        System.out.println(driver.findElement(By.tagName("p")).isDisplayed());
+        System.out.println(driver.findElement(By.tagName("button")).isDisplayed());
+
+        //sprawdzanie czy element nie jest wyszarzony, czy jest dostepny do klikniecie, edycji itp
+        System.out.println(driver.findElement(By.tagName("button")).isEnabled());
+
+        //sprawdzamoe czy checkbox jest zaznaczony
+        WebElement checkbox = driver.findElement(By.cssSelector("[type=checkbox]"));
+        System.out.println(checkbox.isSelected());
+        checkbox.click();
+        System.out.println(checkbox.isSelected());
+
+
+
+
+
 
 
 
