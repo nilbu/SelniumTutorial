@@ -13,7 +13,7 @@ public class IframeTest {
         driver.get("https://testeroprogramowania.github.io/selenium/iframe.html");
 
         //iframe przyjmujący wartosć Webelement
-        WebElement iframe = driver.findElement(By.cssSelector("[src=basic.html])");
+        WebElement iframe = driver.findElement(By.cssSelector("[src=basic.html]"));
         driver.switchTo().frame(iframe);
 
         //iframe przyjumjący "int" przełączanie do iframe wedlug numeracji od "0"
