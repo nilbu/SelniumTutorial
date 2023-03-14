@@ -58,7 +58,7 @@ public class dataBase {
         // Ustanowienie połączenia z bazą danych
         Connection connection = DriverManager.getConnection(dbUrl, username, password);
 
-        // Wykonanie zapytania SELECT
+        // Wykonanie zapytania SELECTa
         String schemaName = "ticket";
         String tableName = "card_active";
         String query = "SELECT * FROM " + schemaName + "." + tableName;
